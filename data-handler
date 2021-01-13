@@ -27,7 +27,7 @@ $pathfile = $argv[1];
 
 $core = require_once __DIR__.'/core.php';
 
-switch ($core) {
+switch ($core[0]) {
 
     case -1:
         echo 'You must indicate the file as the second argument.';
@@ -35,6 +35,10 @@ switch ($core) {
 
     case -2:
         echo 'File not found.';
+        break;
+
+    case -10:
+        echo $core[1];
         break;
 
 }

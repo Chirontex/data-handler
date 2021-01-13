@@ -1,6 +1,6 @@
 <?php
 /**
- *    Data Handler 0.01
+ *    Data Handler 0.02
  *    Copyright (C) 2020  Dmitry Shumilin (dr.noisier@yandex.ru)
  *
  *    This program is free software: you can redistribute it and/or modify
@@ -17,12 +17,21 @@
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 use DRNoisier\DataHandler\Main;
+use DRNoisier\DataHandler\Exceptions\MainException;
 
 require_once __DIR__.'/autoloader.php';
 require_once __DIR__.'/vendor/autoload.php';
 
-if (empty($pathfile)) return -1;
+if (empty($pathfile)) return [-1];
 
-if (!file_exists($pathfile)) return -2;
+if (!file_exists($pathfile)) return [-2];
 
-new Main($pathfile);
+try {
+
+    new Main($pathfile);
+
+} catch (MainException $e) {
+
+    return [$e->getCode(), $e->getMessage()];
+
+}

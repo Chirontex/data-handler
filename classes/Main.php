@@ -18,13 +18,21 @@
  */
 namespace DRNoisier\DataHandler;
 
+use DRNoisier\DataHandler\Exceptions\MainException;
+
 final class Main
 {
 
     public function __construct(string $pathfile)
     {
         
-        echo 'test!';
+        $pathfile_explode = explode('.', $pathfile);
+
+        if ($pathfile_explode[1] !== 'xls' &&
+            $pathfile_explode[1] !== 'xlsx') throw new MainException(
+                'Invalid file extension.',
+                -10
+            );
 
     }
 

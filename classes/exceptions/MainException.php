@@ -16,20 +16,13 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-spl_autoload_register(function($classname) {
+namespace DRNoisier\DataHandler\Exceptions;
 
-    if (strpos($classname, 'DRNoisier\\DataHandler') !== false) {
+use Exception;
 
-        $path = __DIR__.'/classes/';
+class MainException extends Exception
+{
 
-        $file = explode('\\', $classname);
+    
 
-        if ($file[count($file) - 2] === 'Exceptions') $path .= 'exceptions/';
-
-        $file = $file[count($file) - 1].'.php';
-
-        if (file_exists($path.$file)) require_once $path.$file;
-
-    }
-
-});
+}
