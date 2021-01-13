@@ -23,4 +23,18 @@ if (!file_exists(__DIR__.'/vendor/autoload.php')) {
 
 }
 
-require_once __DIR__.'/core.php';
+$pathfile = $argv[1];
+
+$core = require_once __DIR__.'/core.php';
+
+switch ($core) {
+
+    case -1:
+        echo 'You must indicate the file as the second argument.';
+        break;
+
+    case -2:
+        echo 'File not found.';
+        break;
+
+}

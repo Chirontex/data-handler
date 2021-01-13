@@ -1,6 +1,6 @@
 <?php
 /**
- *    Data Handler 0.01
+ *    Data Handler
  *    Copyright (C) 2020  Dmitry Shumilin (dr.noisier@yandex.ru)
  *
  *    This program is free software: you can redistribute it and/or modify
@@ -16,13 +16,16 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-use DRNoisier\DataHandler\Main;
+namespace DRNoisier\DataHandler;
 
-require_once __DIR__.'/autoloader.php';
-require_once __DIR__.'/vendor/autoload.php';
+final class Main
+{
 
-if (empty($pathfile)) return -1;
+    public function __construct(string $pathfile)
+    {
+        
+        echo 'test!';
 
-if (!file_exists($pathfile)) return -2;
+    }
 
-new Main($pathfile);
+}
