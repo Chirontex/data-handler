@@ -19,6 +19,7 @@
 namespace DRNoisier\DataHandler;
 
 use DRNoisier\DataHandler\Exceptions\MainException;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 final class Main
 {
@@ -33,6 +34,21 @@ final class Main
                 'Invalid file extension.',
                 -10
             );
+
+        $this->handleStart(IOFactory::load($pathfile));
+
+    }
+
+    protected function handleStart(object $spreadsheet)
+    {
+
+        if (get_class($spreadsheet) !==
+            'PhpOffice\\PhpSpreadsheet\\Spreadsheet') throw new MainException(
+                'Handling start error: invalid spreadsheet class.',
+                -11
+            );
+
+        
 
     }
 
