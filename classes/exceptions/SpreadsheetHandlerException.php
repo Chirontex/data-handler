@@ -16,29 +16,13 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-namespace DRNoisier\DataHandler;
+namespace DRNoisier\DataHandler\Exceptions;
 
-use DRNoisier\DataHandler\Exceptions\MainException;
-use PhpOffice\PhpSpreadsheet\IOFactory;
+use Exception;
 
-final class Main
+class SpreadsheetHandlerException extends Exception
 {
 
-    protected $handler;
-
-    public function __construct(string $pathfile)
-    {
-        
-        $pathfile_explode = explode('.', $pathfile);
-
-        if ($pathfile_explode[1] !== 'xls' &&
-            $pathfile_explode[1] !== 'xlsx') throw new MainException(
-                'Invalid file extension.',
-                -10
-            );
-
-        $this->handler = new SpreadsheetHandler(IOFactory::load($pathfile));
-
-    }
+    
 
 }

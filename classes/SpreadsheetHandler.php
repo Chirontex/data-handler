@@ -18,26 +18,22 @@
  */
 namespace DRNoisier\DataHandler;
 
-use DRNoisier\DataHandler\Exceptions\MainException;
-use PhpOffice\PhpSpreadsheet\IOFactory;
+use DRNoisier\DataHandler\Exceptions\SpreadsheetHandlerException;
 
-final class Main
+class SpreadsheetHandler
 {
 
-    protected $handler;
+    protected $spreadsheet;
 
-    public function __construct(string $pathfile)
+    public function __construct(object $spreadsheet)
     {
         
-        $pathfile_explode = explode('.', $pathfile);
-
-        if ($pathfile_explode[1] !== 'xls' &&
-            $pathfile_explode[1] !== 'xlsx') throw new MainException(
-                'Invalid file extension.',
-                -10
-            );
-
-        $this->handler = new SpreadsheetHandler(IOFactory::load($pathfile));
+        if (get_class($spreadsheet) ===
+            'PhpOffice\\PhpSpreadsheet\\Spreadsheet') $this->spreadsheet = $spreadsheet;
+        else throw new SpreadsheetHandlerException(
+            'Invalid spreadsheet class.',
+            -20
+        );
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- *    Data Handler 0.02
+ *    Data Handler 0.03
  *    Copyright (C) 2020  Dmitry Shumilin (dr.noisier@yandex.ru)
  *
  *    This program is free software: you can redistribute it and/or modify
