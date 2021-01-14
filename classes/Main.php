@@ -19,6 +19,7 @@
 namespace DRNoisier\DataHandler;
 
 use DRNoisier\DataHandler\Exceptions\MainException;
+use DRNoisier\DataHandler\Exceptions\SpreadsheetHandlerException;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 final class Main
@@ -37,7 +38,18 @@ final class Main
                 -10
             );
 
-        $this->handler = new SpreadsheetHandler(IOFactory::load($pathfile));
+        try {
+
+            $this->handler = new SpreadsheetHandler(IOFactory::load($pathfile));
+
+        } catch (SpreadsheetHandlerException $e) {
+
+            throw new MainException(
+                $e->getMessage(),
+                $e->getCode()
+            );
+
+        }
 
     }
 
