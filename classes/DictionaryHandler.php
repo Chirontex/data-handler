@@ -51,6 +51,9 @@ class DictionaryHandler
 
         $this->path = $path;
 
+        if (substr($this->path, -1) !== '/' &&
+            substr($this->path, -1) !== '\\') $this->path .= '/';
+
         $filename_exploded = explode('.', $filename);
 
         if ($filename_exploded[count($filename_exploded) - 1] !==
@@ -138,7 +141,7 @@ class DictionaryHandler
 
         if (file_put_contents(
             $this->path.$this->filename,
-            $this->dictionary
+            json_encode($this->dictionary)
         ) === false) return false;
         else return true;
 

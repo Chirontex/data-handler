@@ -23,21 +23,36 @@ require_once __DIR__.'/autoloader.php';
 
 try {
 
-    $editor = new DictionaryEditor(__DIR__.'/dictionaries', $filename);
-
     switch ($command) {
 
         case 'set':
+            if (empty($key) || empty ($value)) {
+
+                echo 'Key or value not passed.';
+                die;
+
+            } else $editor = new DictionaryEditor(__DIR__.'/dictionaries', $filename);
+
             if ($editor->set($key, $value)) echo 'Value saved to dictionary.';
             else echo 'Value setting to dictionary failed: file not saved.';
             break;
 
         case 'view':
-            echo $editor->view($key);
+            if (empty($key)) {
+
+                echo 'Key not passed.';
+                die;
+
+            } else $editor = new DictionaryEditor(__DIR__.'/dictionaries', $filename);
+
+            $view_result = $editor->view($key);
+
+            if ($view_result === NULL) echo '(empty)';
+            else echo $view_result;
             break;
 
         case 'help':
-            echo 'set — Set new value to dictionary. If dictionary not exist, it will be created.';
+            echo 'set — Set new value to dictionary. If dictionary not exist, it will be created.'."\n";
             echo 'view — View dictionary value by the key.';
             break;
         
