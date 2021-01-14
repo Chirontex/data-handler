@@ -36,6 +36,14 @@ try {
             echo $editor->view($key);
             break;
 
+        case 'help':
+            echo 'set — Set new value to dictionary. If dictionary not exist, it will be created.';
+            echo 'view — View dictionary value by the key.';
+            break;
+        
+        default:
+            echo 'Invalid command. Use "help" to learn available commands.';
+            break;
     }
 
 } catch (DictionaryEditorException $e) {
