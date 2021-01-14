@@ -1,6 +1,6 @@
 <?php
 /**
- *    Data Handler 0.05
+ *    Data Handler
  *    Copyright (C) 2020  Dmitry Shumilin (dr.noisier@yandex.ru)
  *
  *    This program is free software: you can redistribute it and/or modify
@@ -16,22 +16,30 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-use DRNoisier\DataHandler\Main;
-use DRNoisier\DataHandler\Exceptions\MainException;
+use DRNoisier\DataHandler\DictionaryEditor;
+use DRNoisier\DataHandler\Exceptions\DictionaryEditorException;
 
 require_once __DIR__.'/autoloader.php';
-require_once __DIR__.'/vendor/autoload.php';
-
-if (empty($pathfile)) return [-1];
-
-if (!file_exists($pathfile)) return [-2];
 
 try {
 
-    new Main($pathfile);
+    $editor = new DictionaryEditor(__DIR__.'/dictionaries', $filename);
 
-} catch (MainException $e) {
+    switch ($command) {
 
-    return [$e->getCode(), $e->getMessage()];
+        case 'set':
+            if ($editor->set($key, $value)) echo 'Value saved to dictionary.';
+            else echo 'Value setting to dictionary failed: file not saved.';
+            break;
+
+        case 'view':
+            echo $editor->view($key);
+            break;
+
+    }
+
+} catch (DictionaryEditorException $e) {
+
+    echo $e->getMessage();
 
 }
